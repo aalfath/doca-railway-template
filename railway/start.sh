@@ -5,8 +5,9 @@ set -eu
 # Railway volumes mount as root: hand /data to the image's `node` user, then drop root.
 if [ "$(id -u)" = "0" ]; then
   mkdir -p /data/storage /data/plugins
-  [ "$(stat -c %u /data)" = "1000" ] || chown -R node:node /data
-  [ "$(stat -c %u /data/storage)" = "1000" ] || chown -R node:node /data/storage
+  for d in /data /data/storage /data/plugins; do
+    [ "$(stat -c %u "$d")" = "1000" ] || chown -R node:node "$d"
+  done
   exec setpriv --reuid=node --regid=node --init-groups "$0" "$@"
 fi
 cd /app
