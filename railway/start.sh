@@ -29,7 +29,8 @@ export DOCA_SQLITE_PATH=/data/doca.db
 export DOCA_AI_SQLITE_PATH=/data/ai.db
 export DOCA_PLUGINS_DIR=/data/plugins
 export DOCA_FILE_STORE_ID="${DOCA_FILE_STORE_ID:-local}"
-export DOCA_FILE_STORES_JSON="${DOCA_FILE_STORES_JSON:-{\"version\":1,\"stores\":{\"local\":{\"provider\":\"local\",\"root\":\"/data/storage\"}}}}"
+local_store='{"version":1,"stores":{"local":{"provider":"local","root":"/data/storage"}}}'
+export DOCA_FILE_STORES_JSON="${DOCA_FILE_STORES_JSON:-$local_store}"
 # Railway's edge proxy connects from its private range; trust it so rate limits see real client IPs.
 export DOCA_TRUST_PROXY="${DOCA_TRUST_PROXY:-100.64.0.0/10,fd00::/8}"
 # Heavy renderers (LibreOffice, WeasyPrint) go through a RAM guard; see heavy-guard.sh.
