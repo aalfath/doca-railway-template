@@ -43,7 +43,7 @@ unset DOCA_PDF_CHROMIUM 2>/dev/null || true
 limit=$(cat /sys/fs/cgroup/memory.max 2>/dev/null || echo max)
 if [ "$limit" != "max" ]; then
   mb=$((limit / 1048576))
-  heap=$((mb * 70 / 100))
+  heap=$((mb * 65 / 100))
   [ "$heap" -gt 2048 ] && heap=2048
   [ "$heap" -lt 192 ] && heap=192
   export NODE_OPTIONS="${NODE_OPTIONS:-} --max-old-space-size=${heap}"
